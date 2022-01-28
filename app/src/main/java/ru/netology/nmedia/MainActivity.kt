@@ -18,10 +18,18 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
 
         val adaptor = PostAdaptor(
+            likeClickListener =
             {
-            viewModel.likeById(it.id)},
+                viewModel.likeById(it.id)
+            },
+            shareClickListener =
             {
-            viewModel.shareById(it.id)}
+                viewModel.shareById(it.id)
+            },
+            onRemoveListener =
+            {
+                viewModel.removeById(it.id)
+            },
         )
 
         binding.root.adapter = adaptor
