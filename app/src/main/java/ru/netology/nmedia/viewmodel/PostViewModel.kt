@@ -15,5 +15,10 @@ class PostViewModel : ViewModel() {
         repository.shareById(id)
     }
 
+    fun removeById(id : Long){
+        repository.removeById(id)
+    }
+
+
     val data = repository.getAll()
 }

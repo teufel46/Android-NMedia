@@ -54,5 +54,12 @@ class PostRepositoryInMemory : PostRepository {
         data.value = post
     }
 
+    override fun removeById(id: Long) {
+        post = post.filter {
+            it.id != id
+        }
+        data.value = post
+    }
+
     override fun getAll(): LiveData<List<Post>> = data
 }
