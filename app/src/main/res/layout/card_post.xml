@@ -142,8 +142,5 @@
         android:layout_margin="@dimen/commonSpacing"
         app:layout_constraintEnd_toStartOf="@+id/viewedCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" /><![CDATA[
-
-    />
-]]>
+        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
