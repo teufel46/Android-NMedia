@@ -10,7 +10,8 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias ClickListener = (Post) -> Unit
+typealias OnLikeClickListener = (Post) -> Unit
+typealias OnShareClickListener = (Post) -> Unit
 typealias OnRemoveListener = (Post) -> Unit
 
 fun convertCount2String(count: Long): String {
@@ -26,8 +27,8 @@ fun convertCount2String(count: Long): String {
 }
 
 class PostAdaptor(
-    private val likeClickListener: ClickListener,
-    private val shareClickListener: ClickListener,
+    private val onLikeClickListener: OnLikeClickListener,
+    private val onShareClickListener: OnShareClickListener,
     private val onRemoveListener: OnRemoveListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffItemCallback()) {
 
@@ -38,8 +39,8 @@ class PostAdaptor(
                 parent,
                 false
             ),
-            likeClickListener = likeClickListener,
-            shareClickListener = shareClickListener,
+            onLikeClickListener = onLikeClickListener,
+            onShareClickListener = onShareClickListener,
             onRemoveListener = onRemoveListener
         )
 
@@ -51,8 +52,8 @@ class PostAdaptor(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val likeClickListener: ClickListener,
-    private val shareClickListener: ClickListener,
+    private val onLikeClickListener: OnLikeClickListener,
+    private val onShareClickListener: OnShareClickListener,
     private val onRemoveListener: OnRemoveListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
@@ -69,10 +70,10 @@ class PostViewHolder(
                 liked?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
             liked?.setOnClickListener {
-                likeClickListener(post)
+                onLikeClickListener(post)
             }
             shared?.setOnClickListener {
-                shareClickListener(post)
+                onShareClickListener(post)
             }
             menu?.setOnClickListener {
                 PopupMenu(binding.root.context, binding.menu).apply {
