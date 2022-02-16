@@ -33,23 +33,27 @@ class PostViewModel : ViewModel() {
     }
 
     fun save(){
-        edited.value?.let{// если есть пост, то мы его прочитаем и сохраним
+        edited.value?.let{
             repository.save(it)
-            edited.value = empty // редактируемый пост обнулим
+        }
+        edited.value = empty
+    }
+
+    fun edit(post: Post){
+        edited.value = post
+    }
+
+    fun cancelEdit(){
+        edited.value?.let{
+            edited.value = empty
         }
     }
 
     fun changeContent(content : String) {
-        edited.value?.let {//прочитаем содержимое
-            // проверим если контект совпадает с тем что уже есть
-            if (it.content == content){
-                return
-            }
-
-            edited.value = it.copy(content = content)
+        val text = content.trim()
+        if (edited.value?.content == text) {
+            return
         }
+        edited.value = edited.value?.copy(content = content)
     }
-
-
-
 }
