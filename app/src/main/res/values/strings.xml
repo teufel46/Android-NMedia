@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">NMedia</string>
+    <string name="appName">NMedia</string>
     <string name="nmedia">NMedia</string>
-    <string name="post_remove">Remove</string>
+    <string name="menuRemove">Remove</string>
+    <string name="toastSaveMessage">Content empty</string>
+    <string name="editViewHintMessage">Add content</string>
+    <string name="menuEdit">Edit</string>
+    <string name="headerOldContent">Edit message</string>
 </resources>

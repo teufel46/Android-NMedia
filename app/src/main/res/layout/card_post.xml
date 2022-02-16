@@ -20,6 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/commonSpacing"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@+id/avatar"

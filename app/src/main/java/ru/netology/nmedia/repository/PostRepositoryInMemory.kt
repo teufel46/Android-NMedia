@@ -62,12 +62,22 @@ class PostRepositoryInMemory : PostRepository {
     }
 
     override fun save(post: Post) {
-        if (post.id == 0L) { // добавление поста
+        if (post.id == 0L) {
             val newId = posts.firstOrNull()?.id ?: post.id
-            posts = listOf(post.copy(id = newId + 1)) + posts // новый список
-
+            posts = listOf(
+                post.copy(id = newId + 1)) + posts
+                data.value = posts
             return
         }
+
+        posts = posts.map {
+            if (it.id != post.id ) {
+                it
+            } else {
+                it.copy(content = post.content)
+            }
+        }
+        data.value = posts
     }
 
     override fun getAll(): LiveData<List<Post>> = data
