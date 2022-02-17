@@ -13,13 +13,14 @@
         android:layout_height="@dimen/avatarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/appName"
         app:srcCompat="@drawable/ic_netology" />
 
     <TextView
         android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/commonSpacing"
+        android:layout_marginStart="@dimen/commonSpacing"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
@@ -34,7 +35,7 @@
         android:id="@+id/published"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/commonSpacing"
+        android:layout_marginStart="@dimen/commonSpacing"
         app:layout_constraintTop_toBottomOf="@id/author"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
@@ -48,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@+id/avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:contentDescription="@string/appName"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,22 +84,21 @@
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="264dp" />
 
-    <ImageButton
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/liked"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:background="@android:color/transparent"
         android:layout_marginTop="@dimen/commonSpacing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
-        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
-
+        style = "@style/Widget.App.LikeCheckBox"
+        android:button="@drawable/ic_like_24dp" />
 
     <TextView
         android:id="@+id/likedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/commonSpacingSmall"
+        android:layout_marginStart="@dimen/commonSpacingSmall"
         app:layout_constraintBottom_toBottomOf="@+id/liked"
         app:layout_constraintStart_toEndOf="@+id/liked"
         app:layout_constraintTop_toTopOf="@+id/liked"
@@ -113,6 +113,7 @@
         app:layout_constraintEnd_toStartOf="@+id/sharedCount"
         app:layout_constraintStart_toEndOf="@+id/likedCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
+        android:contentDescription="@string/appName"
         app:srcCompat="@drawable/ic_baseline_share_24" />
 
 
@@ -120,7 +121,7 @@
         android:id="@+id/sharedCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/commonSpacingSmall"
+        android:layout_marginStart="@dimen/commonSpacingSmall"
         app:layout_constraintBottom_toBottomOf="@+id/shared"
         app:layout_constraintStart_toEndOf="@id/shared"
         app:layout_constraintTop_toTopOf="@+id/shared"
@@ -143,5 +144,6 @@
         android:layout_margin="@dimen/commonSpacing"
         app:layout_constraintEnd_toStartOf="@+id/viewedCount"
         app:layout_constraintTop_toBottomOf="@id/barrierBottom"
+        android:contentDescription="@string/appName"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

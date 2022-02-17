@@ -62,11 +62,12 @@ class PostViewHolder(
             likedCount.text = convertCount2String(post.likedCount)
             sharedCount.text = convertCount2String(post.sharedCount)
             viewedCount.text = convertCount2String(post.viewedCount)
-            if (post.likedByMe) {
-                liked?.setImageResource(R.drawable.ic_baseline_favorite_24)
-            } else {
-                liked?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-            }
+            liked?.isChecked = post.likedByMe
+  //          if (post.likedByMe) {
+  //              liked?.setImageResource(R.drawable.ic_baseline_favorite_24)
+  //          } else {
+  //              liked?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+  //          }
             liked?.setOnClickListener {
                 actionListener.onLikeClick(post)
             }
