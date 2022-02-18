@@ -2,6 +2,7 @@ package ru.netology.nmedia.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,13 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-typealias ClickListener = (Post) -> Unit
+interface ActionListener{
+    fun onLikeClick(post: Post)
+    fun onShareClick(post: Post)
+    fun onRemoveClick(post: Post)
+    fun onEditClick(post: Post)
+    fun onCancelEditClick(post: Post)
+}
 
 fun convertCount2String(count: Long): String {
     val result = when {
@@ -24,8 +31,7 @@ fun convertCount2String(count: Long): String {
 }
 
 class PostAdaptor(
-    private val likeClickListener: ClickListener,
-    private val shareClickListener: ClickListener
+    private val actionListener: ActionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
@@ -35,8 +41,7 @@ class PostAdaptor(
                 parent,
                 false
             ),
-            likeClickListener = likeClickListener,
-            shareClickListener = shareClickListener
+            actionListener
         )
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -47,10 +52,9 @@ class PostAdaptor(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val likeClickListener : ClickListener,
-    private val shareClickListener: ClickListener
-): RecyclerView.ViewHolder(binding.root) {
-    fun bind(post: Post){
+    private val actionListener: ActionListener,
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(post: Post) {
         with(binding) {
             author.text = post.author
             published.text = post.published
@@ -64,16 +68,34 @@ class PostViewHolder(
                 liked?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
             liked?.setOnClickListener {
-                likeClickListener(post)
+                actionListener.onLikeClick(post)
             }
             shared?.setOnClickListener {
-                shareClickListener(post)
+                actionListener.onShareClick(post)
+            }
+            menu?.setOnClickListener {
+                PopupMenu(binding.root.context, binding.menu).apply {
+                    inflate(R.menu.post_menu)
+                    setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.remove -> {
+                                actionListener.onRemoveClick(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                actionListener.onEditClick(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }
 }
 
-class PostDiffItemCallback : DiffUtil.ItemCallback<Post>(){
+class PostDiffItemCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
         oldItem.id == newItem.id
 

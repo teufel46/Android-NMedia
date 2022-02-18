@@ -6,7 +6,7 @@ import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemory : PostRepository {
 
-    private var post = listOf(
+    private var posts = listOf(
         Post(
             id = 2,
             author = "Нетология. Пост 2",
@@ -27,10 +27,10 @@ class PostRepositoryInMemory : PostRepository {
         )
     )
 
-    private val data = MutableLiveData(post)
+    private val data = MutableLiveData(posts)
 
     override fun likeById(id: Long) {
-        post = post.map { post ->
+        posts = posts.map { post ->
              if (post.id == id) {
                  post.copy(
                      likedByMe = !post.likedByMe,
@@ -39,11 +39,11 @@ class PostRepositoryInMemory : PostRepository {
                  post
              }
         }
-        data.value = post
+        data.value = posts
     }
 
     override fun shareById(id: Long) {
-        post = post.map { post ->
+        posts = posts.map { post ->
             if (post.id == id) {
                 post.copy(
                     sharedCount = post.sharedCount + 1)
@@ -51,7 +51,33 @@ class PostRepositoryInMemory : PostRepository {
                 post
             }
         }
-        data.value = post
+        data.value = posts
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter {
+            it.id != id
+        }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            val newId = posts.firstOrNull()?.id ?: post.id
+            posts = listOf(
+                post.copy(id = newId + 1)) + posts
+                data.value = posts
+            return
+        }
+
+        posts = posts.map {
+            if (it.id != post.id ) {
+                it
+            } else {
+                it.copy(content = post.content)
+            }
+        }
+        data.value = posts
     }
 
     override fun getAll(): LiveData<List<Post>> = data

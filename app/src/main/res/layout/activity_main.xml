@@ -1,12 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    android:padding="@dimen/commonSpacing"
-    android:clipToPadding="false"
-    tools:listitem="@layout/card_post"
-    android:orientation="vertical"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity"
+    tools:ignore="MissingClass">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="@dimen/commonSpacing"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/oldContentBarrier"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/card_post" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottomBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="saveButton, editedField, emotionsImage" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/oldContentBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="headerOldContent, oldContent, createImage, cancelButton" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/oldContentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="headerOldContent, oldContent, cancelButton, createImage" />
+
+
+    <EditText
+        android:id="@+id/editedField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/editViewHintMessage"
+        android:importantForAutofill="no"
+        android:padding="@dimen/editTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/saveButton"
+        app:layout_constraintStart_toEndOf="@+id/emotionsImage" />
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/commonSpacingSmall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_check_24" />
+
+    <TextView
+        android:id="@+id/headerOldContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/commonSpacingSmall"
+        android:text="@string/headerOldContent"
+        android:textColor="#2768CA"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/oldContent"
+        app:layout_constraintEnd_toStartOf="@+id/cancelButton"
+
+        app:layout_constraintStart_toEndOf="@+id/createImage"
+        tools:text="Edit message" />
+
+    <TextView
+        android:id="@+id/oldContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:padding="@dimen/commonSpacingSmall"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+        app:layout_constraintStart_toEndOf="@+id/createImage"
+        tools:text="@sample/posts.json/data/content" />
+
+    <ImageView
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/commonSpacingSmall"
+        app:layout_constraintBottom_toBottomOf="@+id/oldContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/headerOldContent"
+        app:srcCompat="@drawable/ic_baseline_cancel_24" />
+
+    <ImageView
+        android:id="@+id/createImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/commonSpacingSmall"
+        app:layout_constraintBottom_toBottomOf="@id/oldContent"
+        app:layout_constraintStart_toStartOf="@+id/list"
+        app:layout_constraintTop_toTopOf="@+id/headerOldContent"
+        app:srcCompat="@drawable/ic_baseline_create_24" />
+
+    <ImageView
+        android:id="@+id/emotionsImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/commonSpacingSmall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_baseline_emoji_emotions_24" />
+
+    />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
