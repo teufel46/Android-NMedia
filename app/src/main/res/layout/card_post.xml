@@ -69,18 +69,40 @@
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+        app:layout_constraintBottom_toTopOf="@id/videoPreview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierTop"
         tools:text="@sample/posts.json/data/content" />
+
+    <ImageView
+        android:id="@+id/videoPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        tools:srcCompat="@mipmap/ic_video_preview_foreground"
+        tools:layout_editor_absoluteX="15dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/videoPreview"
+        app:layout_constraintEnd_toEndOf="@+id/videoPreview"
+        app:layout_constraintStart_toStartOf="@+id/videoPreview"
+        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintVertical_bias="0.423"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="content,videoPreview,play_button" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/liked"
@@ -124,4 +146,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/liked"
         tools:text="@sample/posts.json/data/viewCount" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
