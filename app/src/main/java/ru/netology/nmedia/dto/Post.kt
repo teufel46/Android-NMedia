@@ -1,5 +1,7 @@
 package ru.netology.nmedia.dto
 
+import android.net.Uri
+
 data class Post(
     val id : Long = 0L,
     val author : String = "",
@@ -9,5 +11,6 @@ data class Post(
     val likedByMe : Boolean = false,
     val likedCount : Long = 0L,
     val sharedCount : Long = 0L,
-    val viewedCount : Long = 0L
+    val viewedCount : Long = 0L,
+    val videoURL : String
 )
