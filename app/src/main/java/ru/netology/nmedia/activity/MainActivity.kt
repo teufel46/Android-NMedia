@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onPlayMedia(post: Post) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
-                    if (intent.resolveActivity(packageManager) != null) {
-                        startActivity(intent)
+                    val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
+                    if (playIntent.resolveActivity(packageManager) != null) {
+                        startActivity(playIntent)
                     }
 
                 }
