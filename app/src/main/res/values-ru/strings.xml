@@ -8,4 +8,6 @@
     <string name="menuEdit">Редактировать</string>
     <string name="headerOldContent">Редактировние поста</string>
     <string name="likeCheckBoxDescription">Like</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="error_empty_content">Пустое содержание</string>
 </resources>

@@ -7,4 +7,7 @@
     <string name="menuEdit">Edit</string>
     <string name="headerOldContent">Edit message</string>
     <string name="likeCheckBoxDescription">Like</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="error_empty_content">Empty content</string>
+
 </resources>

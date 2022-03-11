@@ -1,6 +1,7 @@
 package ru.netology.nmedia.adaptor
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -10,12 +11,12 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-interface ActionListener{
+interface ActionListener {
     fun onLikeClick(post: Post)
     fun onShareClick(post: Post)
     fun onRemoveClick(post: Post)
     fun onEditClick(post: Post)
-    fun onCancelEditClick(post: Post)
+    fun onPlayMedia(post: Post)
 }
 
 fun convertCount2String(count: Long): String {
@@ -65,6 +66,14 @@ class PostViewHolder(
             liked?.isChecked = post.likedByMe
             liked?.text = convertCount2String(post.likedCount)
 
+            if (post.videoURL != "") {
+                videoPreview.setImageResource(R.mipmap.ic_video_preview_foreground)
+                playButton.visibility = View.VISIBLE
+            } else
+            {
+                playButton.visibility = View.INVISIBLE
+            }
+
             liked?.setOnClickListener {
                 actionListener.onLikeClick(post)
             }
@@ -88,6 +97,14 @@ class PostViewHolder(
                         }
                     }
                 }.show()
+            }
+
+            playButton.setOnClickListener {
+                actionListener.onPlayMedia(post)
+            }
+
+            videoPreview.setOnClickListener {
+                actionListener.onPlayMedia(post)
             }
         }
     }
