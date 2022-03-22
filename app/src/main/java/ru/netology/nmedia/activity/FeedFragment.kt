@@ -60,8 +60,9 @@ class FeedFragment : Fragment() {
 
                 override fun onPlayMedia(post: Post) {
                     val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
-                    //  if (playIntent.resolveActivity(packageManager) != null) {
-                    startActivity(playIntent)
+                    if (playIntent.resolveActivity(requireContext().packageManager) != null) {
+                        startActivity(playIntent)
+                    }
                 }
 
                 override fun onPreviewPost(post: Post) {
