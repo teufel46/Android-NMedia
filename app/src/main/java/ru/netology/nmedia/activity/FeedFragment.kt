@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adaptor.ActionListener
 import ru.netology.nmedia.adaptor.PostAdaptor
 import ru.netology.nmedia.databinding.FragmentFeedBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.CompanionArg.Companion.longArg
+import ru.netology.nmedia.util.CompanionArg.Companion.textArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
@@ -59,16 +59,25 @@ class FeedFragment : Fragment() {
                 }
 
                 override fun onPlayMedia(post: Post) {
-                   val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
-                       //  if (playIntent.resolveActivity(packageManager) != null) {
-                        startActivity(playIntent)
+                    val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
+                    //  if (playIntent.resolveActivity(packageManager) != null) {
+                    startActivity(playIntent)
+                }
+
+                override fun onPreviewPost(post: Post) {
+                    findNavController().navigate(R.id.action_feedFragment_to_postFragment,
+                        Bundle().apply {
+                            longArg = post.id
+                        })
                 }
             }
         )
 
         binding.list.adapter = adaptor
 
-        viewModel.data.observe(viewLifecycleOwner, adaptor::submitList)
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            adaptor.submitList(posts)
+        }
 
         binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
