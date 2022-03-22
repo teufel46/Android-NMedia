@@ -68,7 +68,7 @@ class PostFragment : Fragment() {
                             setOnMenuItemClickListener {
                                 when (it.itemId) {
                                     R.id.remove -> {
-                                        findNavController().navigate(R.id.action_postFragment_to_feedFragment)
+                                        findNavController().navigateUp()
                                         viewModel.removeById(post.id)
                                         true
                                     }
@@ -88,14 +88,16 @@ class PostFragment : Fragment() {
 
                     playButton.setOnClickListener {
                         val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
-                        //  if (playIntent.resolveActivity(packageManager) != null) {
-                        startActivity(playIntent)
+                        if (playIntent.resolveActivity(requireContext().packageManager) != null) {
+                            startActivity(playIntent)
+                        }
                     }
 
                     videoPreview.setOnClickListener {
                         val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoURL))
-                        //if (playIntent.resolveActivity(packageManager) != null) {
-                        startActivity(playIntent)
+                        if (playIntent.resolveActivity(requireContext().packageManager) != null) {
+                            startActivity(playIntent)
+                        }
                     }
                 }
             }
