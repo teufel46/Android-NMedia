@@ -17,6 +17,7 @@ interface ActionListener {
     fun onRemoveClick(post: Post)
     fun onEditClick(post: Post)
     fun onPlayMedia(post: Post)
+    fun onPreviewPost(post: Post)
 }
 
 fun convertCount2String(count: Long): String {
@@ -69,8 +70,7 @@ class PostViewHolder(
             if (post.videoURL != "") {
                 videoPreview.setImageResource(R.mipmap.ic_video_preview_foreground)
                 playButton.visibility = View.VISIBLE
-            } else
-            {
+            } else {
                 playButton.visibility = View.INVISIBLE
             }
 
@@ -106,8 +106,13 @@ class PostViewHolder(
             videoPreview.setOnClickListener {
                 actionListener.onPlayMedia(post)
             }
+
+            content.setOnClickListener {
+                actionListener.onPreviewPost(post)
+            }
         }
     }
+
 }
 
 class PostDiffItemCallback : DiffUtil.ItemCallback<Post>() {

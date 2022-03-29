@@ -89,7 +89,7 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
     }
 
     private fun sync(){
-        /*posts = listOf(
+/*        posts = listOf(
             Post(
                 id = 3,
                 author = "Нетология. Пост 3",
