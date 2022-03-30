@@ -56,8 +56,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         db.execSQL(
             """
                 UPDATE ${PostTable.NAME} SET
-                    ${PostTable.Column.LIKED_COUNT} = ${PostTable.Column.LIKED_COUNT} + CASE WHEN ${PostTable.Column.LIKED_BY_ME} THEN -1 ELSE 1 END,
-                    ${PostTable.Column.LIKED_BY_ME} = CASE WHEN ${PostTable.Column.LIKED_BY_ME} THEN 0 ELSE 1 END
+                    ${PostTable.Column.LIKED_COUNT.columnName} = ${PostTable.Column.LIKED_COUNT.columnName} + CASE WHEN ${PostTable.Column.LIKED_BY_ME.columnName} THEN -1 ELSE 1 END,
+                    ${PostTable.Column.LIKED_BY_ME.columnName} = CASE WHEN ${PostTable.Column.LIKED_BY_ME.columnName} THEN 0 ELSE 1 END
                 WHERE id=?
             """.trimIndent(),
             arrayOf(id) // массив аргументов
