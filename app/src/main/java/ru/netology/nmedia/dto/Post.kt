@@ -12,5 +12,5 @@ data class Post(
     val likedCount : Long = 0L,
     val sharedCount : Long = 0L,
     val viewedCount : Long = 0L,
-    val videoURL : String
+    val videoURL : String = ""
 )
