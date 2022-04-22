@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.util.CompanionArg.Companion.textArg
 import ru.netology.nmedia.viewmodel.PostViewModel
+
 
 class NewPostFragment : Fragment() {
     override fun onCreateView(
@@ -18,6 +21,7 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentNewPostBinding.inflate(layoutInflater)
+
         arguments?.textArg?.let {
             binding.content.setText(it)
         }
@@ -25,15 +29,63 @@ class NewPostFragment : Fragment() {
 
         val viewModel: PostViewModel by viewModels(::requireParentFragment)
 
+        binding.layoutFabSave.visibility = View.INVISIBLE
+        binding.layoutFabCancel.visibility = View.INVISIBLE
         binding.saveButton.setOnClickListener {
-            if (!binding.content.text.isNullOrBlank()){
+
+            if (binding.layoutFabSave.visibility == View.VISIBLE) {
+                binding.layoutFabSave.visibility = View.INVISIBLE
+                binding.layoutFabCancel.visibility = View.INVISIBLE
+            } else {
+                binding.layoutFabSave.visibility = View.VISIBLE
+                binding.layoutFabCancel.visibility = View.VISIBLE
+            }
+
+
+           /* PopupMenu(binding.root.context, binding.saveButton).apply {
+                inflate(R.menu.post_new_action)
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.menu_post_save -> {
+                            if (!binding.content.text.isNullOrBlank()) {
+                                val content = binding.content.text.toString()
+                                viewModel.changeContent(content)
+                                viewModel.save()
+                            }
+                            findNavController().navigateUp()
+                            true
+                        }
+                        R.id.menu_post_cancel -> {
+                            findNavController().navigateUp()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }.show() */
+
+        }
+
+        binding.fabSave.setOnClickListener {
+            if (!binding.content.text.isNullOrBlank()) {
                 val content = binding.content.text.toString()
                 viewModel.changeContent(content)
                 viewModel.save()
             }
+            binding.layoutFabSave.visibility = View.INVISIBLE
+            binding.layoutFabCancel.visibility = View.INVISIBLE
             findNavController().navigateUp()
         }
+
+        binding.fabCancel.setOnClickListener {
+            binding.layoutFabSave.visibility = View.INVISIBLE
+            binding.layoutFabCancel.visibility = View.INVISIBLE
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
+
+
 
 }
