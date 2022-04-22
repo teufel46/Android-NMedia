@@ -39,6 +39,29 @@ class NewPostFragment : Fragment() {
                 binding.layoutFabCancel.visibility = View.VISIBLE
             }
 
+
+           /* PopupMenu(binding.root.context, binding.saveButton).apply {
+                inflate(R.menu.post_new_action)
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.menu_post_save -> {
+                            if (!binding.content.text.isNullOrBlank()) {
+                                val content = binding.content.text.toString()
+                                viewModel.changeContent(content)
+                                viewModel.save()
+                            }
+                            findNavController().navigateUp()
+                            true
+                        }
+                        R.id.menu_post_cancel -> {
+                            findNavController().navigateUp()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }.show() */
+
         }
 
         binding.fabSave.setOnClickListener {
@@ -60,4 +83,7 @@ class NewPostFragment : Fragment() {
 
         return binding.root
     }
+
+
+
 }
