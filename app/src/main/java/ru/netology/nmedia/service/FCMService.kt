@@ -54,7 +54,7 @@ class FCMService : FirebaseMessagingService() {
                 }
             }
         } catch (e: IllegalArgumentException) {
-            handleUnknownMsg(message.data.toString() )
+            handleUnknownMsg(message.data.toString())
         }
     }
 
