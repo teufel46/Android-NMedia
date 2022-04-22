@@ -14,10 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Build
-        run: |
-          chmod +x ./gradlew
-          ./gradlew build
+      - name: Decode google-services.json
+        env:
+          FIREBASE_SECRET: ${{ secrets.GOOGLESERVICES }}
+        run: echo $GOOGLESERVICES > ./app/google-services.json
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2

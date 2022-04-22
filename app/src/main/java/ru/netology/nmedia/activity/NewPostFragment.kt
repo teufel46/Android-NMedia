@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.util.CompanionArg.Companion.textArg
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -41,29 +39,6 @@ class NewPostFragment : Fragment() {
                 binding.layoutFabCancel.visibility = View.VISIBLE
             }
 
-
-           /* PopupMenu(binding.root.context, binding.saveButton).apply {
-                inflate(R.menu.post_new_action)
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.menu_post_save -> {
-                            if (!binding.content.text.isNullOrBlank()) {
-                                val content = binding.content.text.toString()
-                                viewModel.changeContent(content)
-                                viewModel.save()
-                            }
-                            findNavController().navigateUp()
-                            true
-                        }
-                        R.id.menu_post_cancel -> {
-                            findNavController().navigateUp()
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            }.show() */
-
         }
 
         binding.fabSave.setOnClickListener {
@@ -85,7 +60,4 @@ class NewPostFragment : Fragment() {
 
         return binding.root
     }
-
-
-
 }
