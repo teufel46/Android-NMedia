@@ -12,10 +12,12 @@
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/activity_new_post.xml" value="0.1875" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/card_post.xml" value="0.259375" />
+        <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/fab_submenu.xml" value="0.176" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/fragment_feed.xml" value="0.2509057971014493" />
-        <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/fragment_new_post.xml" value="0.1" />
+        <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/fragment_new_post.xml" value="0.176" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/layout/fragment_post.xml" value="0.13994565217391305" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/menu/post_menu.xml" value="0.2557291666666667" />
+        <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/menu/post_new_action.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/Polina/AndroidStudioProjects/NMedia/app/src/main/res/mipmap-anydpi-v26/ic_videoPreview.xml" value="0.1695" />
       </map>
