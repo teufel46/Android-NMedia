@@ -9,5 +9,13 @@
     <string name="likeCheckBoxDescription">Like</string>
     <string name="chooser_share_post">Share post</string>
     <string name="error_empty_content">Empty content</string>
-
+    <string name="menu_post_save">Save</string>
+    <string name="menu_post_cancel">Cancel</string>
+    <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="notification_new_post">User %1$s made a new post: %2$s</string>
+    <string name="channel_remote_name">Server notifications</string>
+    <string name="channel_remote_description">Notifications from remote server</string>
+    <string name="notification_unknown">Unknown message</string>
+    <string name="content_desc">Content descriprion</string>
 </resources>
