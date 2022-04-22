@@ -54,7 +54,7 @@ class FCMService : FirebaseMessagingService() {
                 }
             }
         } catch (e: IllegalArgumentException) {
-            handleUnknownMsg()
+            handleUnknownMsg(message.data.toString() )
         }
     }
 
@@ -99,10 +99,14 @@ class FCMService : FirebaseMessagingService() {
             .notify(Random.nextInt(100_000), notification)
     }
 
-    private fun handleUnknownMsg() {
+    private fun handleUnknownMsg(content: String?) {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_baseline_bolt_24)
             .setContentTitle(getString(R.string.notification_unknown))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(content)
+            )
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
 
@@ -127,3 +131,4 @@ data class NewPost(
     val userName: String,
     val content: String
 )
+

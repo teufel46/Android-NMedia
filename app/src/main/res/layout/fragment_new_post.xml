@@ -43,7 +43,7 @@
         android:layout_marginEnd="@dimen/commonSpacing"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/cardview_light_background"
@@ -60,7 +60,7 @@
                 android:paddingLeft="@dimen/commonSpacing"
                 android:paddingBottom="@dimen/commonSpacing"
                 android:paddingTop="@dimen/commonSpacing" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabSave"
@@ -82,7 +82,7 @@
         android:layout_marginEnd="@dimen/commonSpacing"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/cardview_light_background"
@@ -99,7 +99,7 @@
                 android:paddingLeft="@dimen/commonSpacing"
                 android:paddingBottom="@dimen/commonSpacing"
                 android:paddingTop="@dimen/commonSpacing" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCancel"
@@ -110,13 +110,5 @@
             android:contentDescription="@string/content_desc"
             app:fabSize="mini" />
     </LinearLayout>
-
-  <!--  <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_new_post_save_menu"
-        app:constraint_referenced_ids="layoutFabSave,layoutFabCancel" />
-
--->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
