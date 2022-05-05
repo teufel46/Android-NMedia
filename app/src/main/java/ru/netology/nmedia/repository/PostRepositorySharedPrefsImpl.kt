@@ -26,6 +26,9 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
     }
 
     override fun getAll(): LiveData<List<Post>> = data
+    override fun getAll_http(): List<Post> {
+        TODO("Not yet implemented")
+    }
 
     override fun likeById(id: Long) {
         posts = posts.map { post ->
@@ -40,6 +43,10 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
         }
         data.value = posts
         sync()
+    }
+
+    override fun likeById_http(id: Long): Post {
+        TODO("Not yet implemented")
     }
 
     override fun shareById(id: Long) {

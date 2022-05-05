@@ -24,6 +24,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders.usesCleartextTraffic = false
+        }
+        debug {
+            manifestPlaceholders.usesCleartextTraffic = true
         }
     }
     compileOptions {
@@ -41,11 +45,13 @@ dependencies {
     def recycleviewVersion = "1.2.1"
     def mdcVersion = "1.5.0"
     def fragmentVersion = "1.4.1"
-    def gsonVersion = "2.8.9"
+    def gsonVersion = "2.9.0"
     def navVersion = "2.4.2"
     def roomVersion = "2.4.2"
     def firebaseVersion = "29.3.0"
     def playServicesBaseVersion = "18.0.1"
+    def okhttpVersion = "4.9.3"
+    def swiperefreshlayoutVersion = "1.1.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -69,4 +75,8 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging-ktx"
     implementation "com.google.android.gms:play-services-base:$playServicesBaseVersion"
     implementation "androidx.cardview:cardview:1.0.0"
+
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayoutVersion"
 }
