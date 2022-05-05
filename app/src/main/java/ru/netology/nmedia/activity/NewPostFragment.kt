@@ -49,7 +49,6 @@ class NewPostFragment : Fragment() {
             }
             binding.layoutFabSave.visibility = View.INVISIBLE
             binding.layoutFabCancel.visibility = View.INVISIBLE
-            findNavController().navigateUp()
         }
 
         binding.fabCancel.setOnClickListener {
