@@ -64,8 +64,8 @@ class PostViewHolder(
 
             shared.text = convertCount2String(post.sharedCount)
             viewed.text = convertCount2String(post.viewedCount)
-            liked?.isChecked = post.likedByMe
-            liked?.text = convertCount2String(post.likedCount)
+            liked.isChecked = post.likedByMe
+            liked.text = convertCount2String(post.likedCount)
 
             if (post.videoURL != "") {
                 videoPreview.setImageResource(R.mipmap.ic_video_preview_foreground)
@@ -74,13 +74,13 @@ class PostViewHolder(
                 playButton.visibility = View.INVISIBLE
             }
 
-            liked?.setOnClickListener {
+            liked.setOnClickListener {
                 actionListener.onLikeClick(post)
             }
-            shared?.setOnClickListener {
+            shared.setOnClickListener {
                 actionListener.onShareClick(post)
             }
-            menu?.setOnClickListener {
+            menu.setOnClickListener {
                 PopupMenu(binding.root.context, binding.menu).apply {
                     inflate(R.menu.post_menu)
                     setOnMenuItemClickListener {

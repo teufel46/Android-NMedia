@@ -19,4 +19,7 @@
     <string name="channel_remote_description">Уведомления с удалённого сервера</string>
     <string name="notification_unknown">Неизвестное сообщение</string>
     <string name="content_desc">Content descriprion</string>
+    <string name="error_loading">Что-то пошло не так. Попробуйте позднее</string>
+    <string name="empty_posts">Постов нет.\nЕсли создадите новый пост, то он появится здесь</string>
+    <string name="retry_loading">Повторить</string>
 </resources>

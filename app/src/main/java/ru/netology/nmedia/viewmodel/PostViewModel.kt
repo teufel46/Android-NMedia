@@ -2,12 +2,15 @@ package ru.netology.nmedia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import ru.netology.nmedia.db.AppDb
-import ru.netology.nmedia.db.AppDbRoom
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.repository.*
+import ru.netology.nmedia.model.FeedModel
+import ru.netology.nmedia.repository.PostRepository
+import ru.netology.nmedia.repository.PostRepositoryHttpImpl
+import ru.netology.nmedia.util.SingleLiveEvent
+import java.io.IOException
+import kotlin.concurrent.thread
 
 val empty = Post(
     id = 0L,
@@ -20,32 +23,84 @@ val empty = Post(
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
- //   private val repository : PostRepository = PostRepositorySQLiteImpl(
-//        AppDb.getInstance(application).postDao
-  //  )
-    private val repository : PostRepository = PostRepositoryRoomImpl(
-        AppDbRoom.getInstance(application).postDaoRoom()
-    )
-
-    val data = repository.getAll()
+    private val repository: PostRepository = PostRepositoryHttpImpl()
+    private val _data = MutableLiveData(FeedModel())
+    val data: LiveData<FeedModel>
+        get() = _data
 
     val edited = MutableLiveData(empty)
 
+    private val _postCreated = SingleLiveEvent<Unit>()
+    val postCreated: LiveData<Unit>
+        get() = _postCreated
+
+    init {
+        loadPosts()
+    }
+
+    fun loadPosts() {
+        thread {
+            _data.postValue(FeedModel(loading = true))
+            try {
+                val posts = repository.getAll_http()
+                FeedModel(posts = posts, empty = posts.isEmpty())
+            } catch (e: IOException) {
+                FeedModel(error = true)
+            }.also(_data::postValue)
+        }
+    }
+
     fun likeById(id: Long) {
-        repository.likeById(id)
+        thread {
+            try {
+                val post = repository.likeById_http(id)
+
+                val posts = _data.value?.posts.orEmpty().map { postnew ->
+                    if (postnew.id == id) {
+                        postnew.copy(
+                            likedByMe = post.likedByMe,
+                            likedCount = post.likedCount
+                        )
+                    } else {
+                        postnew
+                    }
+                }
+                FeedModel(posts = posts)
+            } catch (e: IOException) {
+                FeedModel(error = true)
+            }.also(_data::postValue)
+
+        }
     }
 
     fun shareById(id: Long) {
-        repository.shareById(id)
+        thread { repository.shareById(id) }
     }
 
     fun removeById(id: Long) {
-        repository.removeById(id)
+        thread {
+            val old = _data.value?.posts.orEmpty()
+            val posts = old
+                .filter { it.id != id }
+            _data.postValue(
+                _data.value?.copy(
+                    posts = posts, empty = posts.isEmpty()
+                )
+            )
+            try {
+                repository.removeById(id)
+            } catch (e: IOException) {
+                _data.postValue(_data.value?.copy(posts = old))
+            }
+        }
     }
 
     fun save() {
         edited.value?.let {
-            repository.save(it)
+            thread {
+                repository.save(it)
+                _postCreated.postValue(Unit)
+            }
         }
         edited.value = empty
     }

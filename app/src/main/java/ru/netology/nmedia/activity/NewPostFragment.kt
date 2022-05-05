@@ -13,6 +13,7 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 
 
 class NewPostFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,30 +39,6 @@ class NewPostFragment : Fragment() {
                 binding.layoutFabSave.visibility = View.VISIBLE
                 binding.layoutFabCancel.visibility = View.VISIBLE
             }
-
-
-           /* PopupMenu(binding.root.context, binding.saveButton).apply {
-                inflate(R.menu.post_new_action)
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.menu_post_save -> {
-                            if (!binding.content.text.isNullOrBlank()) {
-                                val content = binding.content.text.toString()
-                                viewModel.changeContent(content)
-                                viewModel.save()
-                            }
-                            findNavController().navigateUp()
-                            true
-                        }
-                        R.id.menu_post_cancel -> {
-                            findNavController().navigateUp()
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            }.show() */
-
         }
 
         binding.fabSave.setOnClickListener {
@@ -78,6 +55,11 @@ class NewPostFragment : Fragment() {
         binding.fabCancel.setOnClickListener {
             binding.layoutFabSave.visibility = View.INVISIBLE
             binding.layoutFabCancel.visibility = View.INVISIBLE
+            findNavController().navigateUp()
+        }
+
+        viewModel.postCreated.observe(viewLifecycleOwner) {
+            viewModel.loadPosts()
             findNavController().navigateUp()
         }
 

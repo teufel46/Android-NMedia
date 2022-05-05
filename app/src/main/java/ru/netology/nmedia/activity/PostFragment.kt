@@ -24,7 +24,8 @@ class PostFragment : Fragment() {
 
         with(binding.postContent) {
             viewModel.data.observe(viewLifecycleOwner) { posts ->
-                val post = posts.find { it.id == arguments?.longArg }
+                val post = posts.posts
+                    .find { it.id == arguments?.longArg }
                 if (post != null) {
                     author.text = post.author
                     published.text = post.published
@@ -43,6 +44,7 @@ class PostFragment : Fragment() {
                 }
             }
         }
+
         return binding.root
     }
 }

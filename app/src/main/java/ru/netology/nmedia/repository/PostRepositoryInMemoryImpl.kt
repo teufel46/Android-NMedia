@@ -55,6 +55,10 @@ class PostRepositoryInMemory : PostRepository {
         data.value = posts
     }
 
+    override fun likeById_http(id: Long): Post {
+        TODO("Not yet implemented")
+    }
+
     override fun shareById(id: Long) {
         posts = posts.map { post ->
             if (post.id == id) {
@@ -96,4 +100,7 @@ class PostRepositoryInMemory : PostRepository {
     }
 
     override fun getAll(): LiveData<List<Post>> = data
+    override fun getAll_http(): List<Post> {
+        TODO("Not yet implemented")
+    }
 }

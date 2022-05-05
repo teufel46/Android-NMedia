@@ -14,8 +14,16 @@ class PostRepositoryRoomImpl(
         }
     }
 
+    override fun getAll_http(): List<Post> {
+        TODO("Not yet implemented")
+    }
+
     override fun likeById(id: Long) {
         daoRoom.likeById(id)
+    }
+
+    override fun likeById_http(id: Long): Post {
+        TODO("Not yet implemented")
     }
 
     override fun shareById(id: Long) {
